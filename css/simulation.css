@@ -1,0 +1,62 @@
+
+.console-bg {
+    margin-top: 5px;
+    border: 2px solid green;
+    padding-left: 60px;
+    padding-bottom: 35px;
+    border-radius: 50px 20px;
+    background-color: black;
+    color: limegreen;
+    width: 500px;
+    height: 600px;
+    overflow:auto;
+}
+
+.scoreboard {
+    position: absolute;
+    top: 0;
+    margin-left: 40vw;
+    margin-top: 26vh;
+    background: ivory;
+}
+
+p {
+    color: red;
+}
+
+.score {
+    color: aquamarine;
+    text-decoration: overline;
+}
+
+.CWin {
+    color: #328ad1;
+}
+
+
+.TWin {
+    color: rgb(196, 56, 68);
+}
+
+.CTName {
+    color: #328ad1;
+}
+
+.TName {
+    color: rgb(196, 56, 68);
+
+}
+
+@media (min-width: 640px) {
+    h5 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 640px) {
+    .console-bg {
+        height: 400px;
+        font-size: 15px;
+    }
+    
+}
