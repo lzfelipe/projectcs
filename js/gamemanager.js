@@ -1,3 +1,4 @@
+//delay dos timeouts
 var delay = 750;
 function simulate()  {
 simularButton.hide();
@@ -7,6 +8,7 @@ var TRrounds = 0;
 var CTrounds = 0;
 battleHelper();
 
+//battlehelper() controla os rounds, halfime, os times e chama a batalha
 function battleHelper() {
   scrollDown()
   getConsole.insertAdjacentHTML("beforebegin", "<p>Round: " + rounds + "</p>");
@@ -25,7 +27,7 @@ function battleHelper() {
     }
     [CTrounds, TRrounds] = swap(CTrounds, TRrounds);
     scrollDown()
-    setTimeout(function() {battle(playerTeam, enemyTeam)},500)
+    setTimeout(function() {battle(playerTeam, enemyTeam)},1000)
   }
   
   if (rounds>16) {
@@ -38,7 +40,8 @@ function battleHelper() {
     
   
   }
-
+  
+// funcao battle() recebe os times e realiza o round, seleciona um player de cada array e depois remove baseado em quem perdeu. Aqui fica as regras para definir o vencedor de cada batalha e a lógica de cada round.
 function battle(playerTeam, enemyTeam) { 
   scrollDown()
   // If either of the teams have no members, end the round

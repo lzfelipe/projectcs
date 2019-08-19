@@ -12,14 +12,18 @@
     <!-- header -->
     <header>
         <div class="container">
-            <h1 class="text-center">Project CS</h1>
-            <h3 class="text-center">Choose 5 players for your team, the remainings will be your enemies.</h3>
+            <h3 class="text-center bg-dark p-1 text-success fixed-top" id="player-money"></h3>
+            <h1 class="text-center mt-5">Project CS</h1>
+            <h3 class="text-center">Choose 5 players for your team, be careful with your money</h3>
         </div>
     </header>
     <!-- /header -->
 
     <!-- rows -->
     <section class="container middle">
+            <div class="row justify-content-center mt-2 mb-1">
+                    <button class="btn btn-primary btn-lg" id="shuffle" onclick="location.reload()">Shuffle Players</button>
+            </div>
         <div class="row justify-content-center" id="cards-container">
           <!--Javascript insert cards here-->
         </div>
@@ -36,6 +40,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/Player.js"></script>
+    <script src="js/players-list.js"></script>
     <script src="js/create-elements.js"></script>
     <script src="js/team-select.js"></script>
 </body>

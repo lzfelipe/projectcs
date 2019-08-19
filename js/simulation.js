@@ -4,8 +4,10 @@ const simularButton = $('#simular-button');
 const speedButton = $('#speed-up');
 const quickEndButton = $('#quickEnd');
 let rounds = 1;
-let playerTeam = JSON.parse(sessionStorage.getItem('playerTeam'))
-let enemyTeam = JSON.parse(sessionStorage.getItem('enemyTeam'))
+const playerTeam = JSON.parse(sessionStorage.getItem('playerTeam'))
+const enemyTeam = JSON.parse(sessionStorage.getItem('enemyTeam'))
+
+
 
 if (playerTeam == null) {
   $('#simular-button').hide();

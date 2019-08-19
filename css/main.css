@@ -2,15 +2,52 @@
     max-width: 18rem;
 }
 
-.card-image-size {
-    object-fit: contain;
-    height: 150px;
+.card-disapear{
+    transition : all 1s;
+    -wekit-transition : all 1s;
+    -moz-transition : all 1s;
 }
 
-.card-border {
-    border: 2px solid;
-    border-color: black;
+.card-image-size {
+    object-fit: cover;
+    height: 180px;
 }
+
+.card-body-bronze {
+    background-color: #bf844d9f;
+    margin: 0;
+}
+
+.card-border-bronze {
+    border: 2px solid;
+    border-color: #bf854d;
+}
+
+
+
+.card-body-silver {
+    background-color: #b9b9b9 ;
+    margin: 0;
+}
+
+.card-border-silver {
+    border: 2px solid;
+    border-color: #757474e5;
+}
+
+
+
+.card-body-gold {
+    background-color: rgba(240, 212, 54, 0.562);
+    margin: 0;
+}
+
+.card-border-gold {
+    border: 2px solid;
+    border-color: rgba(151, 130, 10, 0.87);
+}
+
+
 
 .button-bg-color {
     background-color: rgb(18, 19, 18);
@@ -29,4 +66,11 @@ footer {
 
 body {
     background-color: lightgray;
+}
+
+
+@media (max-width: 767px) {
+    .card-image-size {
+        height: 150px;
+    }
 }
