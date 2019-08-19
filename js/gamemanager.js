@@ -190,7 +190,14 @@ if (!playerTeamOutput.length) {
     getConsole.insertAdjacentHTML("beforebegin", "<p class='score'>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
     scrollDown()
     } 
-  
+
+    if (TRrounds == 15  && CTrounds == 15) {
+      speedButton.hide();
+      quickEndButton.hide();
+      getConsole.insertAdjacentHTML("beforebegin", "<p> DRAW </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
+      scrollDown()
+      return;
+    }
 //Immedietly recall the function to begin another battle
   if(CTrounds < 16 && TRrounds < 16) {
   return setTimeout(function() {
@@ -209,13 +216,6 @@ if (!playerTeamOutput.length) {
         quickEndButton.hide();
         getConsole.insertAdjacentHTML("beforebegin", "<p class='CWin'> Player Victory! </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
         scrollDown()
-    }
-  
-    if (TRrounds == 15  && CTrounds == 15) {
-      speedButton.hide();
-      quickEndButton.hide();
-      getConsole.insertAdjacentHTML("beforebegin", "<p> DRAW </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
-      scrollDown()
     }
 
   }
