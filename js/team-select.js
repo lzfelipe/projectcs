@@ -1,5 +1,4 @@
-doCards();
-
+doCards()
 var playerTeam = [];
 //clonando a array ' allplayers ' do player.js para fazer o time inimigo com os restantes.
 var enemyTeam = allPlayers.slice(0);
@@ -18,7 +17,7 @@ function getTeams(player) {
      sessionStorage.setItem('enemyTeam', JSON.stringify(enemyTeam));
 
      console.log(enemyTeam);
-    if (playerTeam.length == 3) {
+    if (playerTeam.length == 5) {
         setTimeout(function(){
             window.location.href = "simulation.html";       
         }, 10) 

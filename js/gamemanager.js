@@ -1,71 +1,22 @@
-const getConsole = document.querySelector(".console");
-const consoleID = document.querySelector("#cons");
-const simularButton = $('#simular-button')
-let rounds = 1;
-let playerTeam = JSON.parse(sessionStorage.getItem('playerTeam'))
-let enemyTeam = JSON.parse(sessionStorage.getItem('enemyTeam'))
-
-if (playerTeam == null) {
-  $('#simular-button').hide();
-}
-else if (playerTeam.length < 3) {
-  $('#simular-button').hide();
-}
-
-
-
-let time1 = document.querySelector(".time1");
-let time2 = document.querySelector(".time2");
-time1.innerHTML = "Your Team: "+ playerTeam[0].name + ", " + playerTeam[1].name + " and " + playerTeam[2].name;
-time2.innerHTML = "Enemy Team: "+ enemyTeam[0].name + ", " + enemyTeam[1].name + " and " + enemyTeam[2].name;
-
-
-
-
+var delay = 750;
 function simulate()  {
 simularButton.hide();
+speedButton.show();
+quickEndButton.show();
 var TRrounds = 0;
 var CTrounds = 0;
-
-function intervalo () {
-
-
-    var intr = setInterval(function() {
-    getConsole.insertAdjacentHTML("beforebegin", "<p>Round: " + rounds + "</p>");
-    battleHelper();
-    rounds++;
-    var consoleID = document.getElementById('cons');
-
-    if ( CTrounds == 16 ) {
-    getConsole.insertAdjacentHTML("beforebegin", "<p class='TWin'> Enemy Victory! </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
-    
-    consoleID.scrollTop = consoleID.scrollHeight;
-    clearInterval(intr);
-    }
-
-    if ( TRrounds == 16 ) {
-        getConsole.insertAdjacentHTML("beforebegin", "<p class='CWin'> Player Victory! </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
-        consoleID.scrollTop = consoleID.scrollHeight;
-        clearInterval(intr);
-    }
-
-    if ( TRrounds == 15  && CTrounds == 15 ) {
-      getConsole.insertAdjacentHTML("beforebegin", "<p> DRAW </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
-      consoleID.scrollTop = consoleID.scrollHeight;
-      clearInterval(intr);
-  }
-    
-    consoleID.scrollTop = consoleID.scrollHeight;
-}, 2000);      
-}
-intervalo()
+battleHelper();
 
 function battleHelper() {
+  scrollDown()
+  getConsole.insertAdjacentHTML("beforebegin", "<p>Round: " + rounds + "</p>");
+  
   if (rounds<16)  {
   let playerTeam = JSON.parse(sessionStorage.getItem('playerTeam'))
   let enemyTeam = JSON.parse(sessionStorage.getItem('enemyTeam'))
-  battle(playerTeam, enemyTeam); }
-  
+    battle(playerTeam, enemyTeam);
+}
+
   if (rounds===16) {
     function swap(CTrounds, TRrounds) {
       getConsole.insertAdjacentHTML("beforebegin", "<p>Half Time: Swapping Teams</p>");
@@ -73,20 +24,26 @@ function battleHelper() {
       return [TRrounds, CTrounds]
     }
     [CTrounds, TRrounds] = swap(CTrounds, TRrounds);
+    scrollDown()
+    setTimeout(function() {battle(playerTeam, enemyTeam)},500)
   }
-    
+  
   if (rounds>16) {
     let playerTeam = JSON.parse(sessionStorage.getItem('enemyTeam'))
     let enemyTeam = JSON.parse(sessionStorage.getItem('playerTeam'))
-    battle(playerTeam, enemyTeam)
+    battle(playerTeam, enemyTeam);
   } 
+
+
+    
   
   }
+
 function battle(playerTeam, enemyTeam) { 
+  scrollDown()
   // If either of the teams have no members, end the round
   if (!playerTeam.length || !enemyTeam.length) {
-    consoleID.scrollTop = consoleID.scrollHeight;
-    return;
+    return battleHelper();
   }
   
   // Duplicate the input teams to modify them
@@ -101,6 +58,7 @@ function battle(playerTeam, enemyTeam) {
   // Get the player from each team
   player = playerTeam[playerTeamIndex];
   enemy = enemyTeam[enemyTeamIndex];
+
   
   // Select a random stat to the player to compare.
   let StatPlayer = ["aim", "awareness", "positioning"];
@@ -112,16 +70,13 @@ function battle(playerTeam, enemyTeam) {
   // Probability of T's win the round by bomb explosion.
   let min1 = 0;
   let max2 = 150;
+  let planted = false;
   
-  let EncounterRating = Math.floor(Math.random() * (+max2 - +min1)) + +min1;
-  if (EncounterRating < 2) {
-    getConsole.insertAdjacentHTML("beforebegin", "The bomb has exploded and remainings CT's saved their weapons.");
-    getConsole.insertAdjacentHTML("beforebegin", "<p class='TWin'>TRs Won the Round </p>");
-    TRrounds++
-    getConsole.insertAdjacentHTML("beforebegin", "<p class='score'>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
-    // If the bomb is detonated, end the round
-    return;
-  } else {
+  let bombPlanted = Math.floor(Math.random() * (+max2 - +min1)) + +min1;
+  if (bombPlanted < 0 && planted==false) {
+    getConsole.insertAdjacentHTML("beforebegin", "The bomb has been planted<br>");
+    planted=true;
+  } 
 
                                                       // AIM  > AWARENESS // "<span class='CTName'>" + </span>
     //player aim == enemy awareness
@@ -129,9 +84,11 @@ function battle(playerTeam, enemyTeam) {
     if (player.aim > enemy.aim) {
       getConsole.insertAdjacentHTML("beforebegin","<span class='CTName'>" + player.name + "</span> killed <span class='TName'>" + enemy.name + " </span><br>");
       enemyTeamOutput.splice(enemyTeamIndex, 1)
+      
     } else if (player.aim < enemy.aim) {
       getConsole.insertAdjacentHTML("beforebegin", "<span class='TName'>" +  enemy.name + "</span>  killed <span class='CTName'>" + player.name + " </span><br>");
       playerTeamOutput.splice(playerTeamIndex, 1)
+
 
     } else if (player.aim == enemy.aim && player.overall > enemy.overall) {
     getConsole.insertAdjacentHTML("beforebegin", "<span class='CTName'>" + player.name + " </span> killed <span class='TName'>" + enemy.name + " </span> with a lucky shot<br>");
@@ -214,30 +171,58 @@ if (StatPlayerRandom == "positioning" && StatEnemyRandom == "awareness" ) {
   playerTeamOutput.splice(playerTeamIndex, 1)
 } 
 
-}
+
 
 //Look if either of the teams have players left and show the round winner/score.
 if (!enemyTeamOutput.length) {
     getConsole.insertAdjacentHTML("beforebegin", "<p class='CWin'>CTs Won the Round</p>");
+    rounds++;
     CTrounds++
     getConsole.insertAdjacentHTML("beforebegin", "<p class='score'>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
+    scrollDown()
     } 
 
 
 if (!playerTeamOutput.length) {
     getConsole.insertAdjacentHTML("beforebegin", "<p class='TWin'>TRs Won the Round</p>");
+    rounds++;
     TRrounds++
     getConsole.insertAdjacentHTML("beforebegin", "<p class='score'>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
+    scrollDown()
     } 
   
 //Immedietly recall the function to begin another battle
-  return battle(playerTeamOutput, enemyTeamOutput)
-
+  if(CTrounds < 16 && TRrounds < 16) {
+  return setTimeout(function() {
+    battle(playerTeamOutput, enemyTeamOutput)},delay)
+  } else {
+    
+    if (CTrounds == 16) {
+      speedButton.hide();
+      quickEndButton.hide();
+      getConsole.insertAdjacentHTML("beforebegin", "<p class='TWin'> Enemy Victory! </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
+      scrollDown()
+      }
   
-}
+    if (TRrounds == 16) {
+        speedButton.hide();
+        quickEndButton.hide();
+        getConsole.insertAdjacentHTML("beforebegin", "<p class='CWin'> Player Victory! </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
+        scrollDown()
+    }
+  
+    if (TRrounds == 15  && CTrounds == 15) {
+      speedButton.hide();
+      quickEndButton.hide();
+      getConsole.insertAdjacentHTML("beforebegin", "<p> DRAW </p> <p class='score'>Final Score:<br>CounterT: "+CTrounds+" x "+"Terrorists: "+TRrounds+"</p>");
+      scrollDown()
+    }
+
+  }
+  
+ 
+
 }
 
-function chooseAgain() {
-  window.location.href = "index.html";
-  sessionStorage.clear();
 }
+

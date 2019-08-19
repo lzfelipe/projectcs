@@ -2,7 +2,7 @@
 .console-bg {
     margin-top: 5px;
     border: 2px solid green;
-    padding-left: 60px;
+    padding-left: 50px;
     padding-bottom: 35px;
     border-radius: 50px 20px;
     background-color: black;
@@ -17,7 +17,7 @@
     top: 0;
     margin-left: 40vw;
     margin-top: 26vh;
-    background: ivory;
+    background-color: black;
 }
 
 p {
@@ -47,8 +47,14 @@ p {
 
 }
 
+footer {
+    
+    bottom: 0;
+}
+
+
 @media (min-width: 640px) {
-    h5 {
+    .teams {
         font-size: 30px;
     }
 }

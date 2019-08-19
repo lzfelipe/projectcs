@@ -12,33 +12,38 @@
 
 <section class="container ">
         <div class="row justify-content-center">
-                <h5 class="time1 col-12 text-center"></h5>
-                <h5 class="time2 col-12 text-center"></h5> 
+                <h5 class="teams time1 col-12 text-center text-success"></h5>
+                <h5 class="teams time2 col-12 text-center text-danger"></h5> 
                 <h2 class="col-12 text-center">Console: </h2>
                 <div class="console-bg col-9 col-md-5" id="cons">
                     <div class="console"></div>
                 </div>
                 <div class="container middle">
             <div class="row justify-content-center">
+                    <div class="btn-group justify-content-center w-100" role="group">
+                            <button id="speed-up" class="col-4 col-md-2 mt-2 mb-2 btn btn-warning" onclick="speedUp();" style="display: none;">x2</button>
+                            <button id="quickEnd" class="col-4 col-md-2 mt-2 mb-2 btn btn-danger" onclick="endQuick();" style="display: none;">Quick End</button>
+                        </div>
+                    <button id="simular-button" class="col-6 col-md-2 m-2 btn btn-primary btn-lg"onclick="simulate();">Play Match</button>
                     <button class="col-6 col-md-2 m-2 btn btn-primary btn-lg"onclick="chooseAgain()">Choose Players</button>
-                    <button id="simular-button" class="col-6 col-md-2 m-2 btn btn-primary btn-lg"onclick="simulate();">Simulate</button>
                 </div>
             </div>
         </div>
+        
 
     </section>
 
     <footer>
-            <h6 class="text-center text-light bg-dark p-4 m-0 position-static">ProjectCS © Felipe Veiga - fveiga.com.br </h6>
+            <h5 class="text-center text-light bg-dark p-4 mt-2">ProjectCS © Felipe Veiga - fveiga.com.br </h5>
     </footer>
-
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/Player.js"></script>
-    <script src="js/gamemanager.js"></script>
     <script src="js/simulation.js"></script>
+    <script src="js/gamemanager.js"></script>
+
 
 </body>
 </html>
